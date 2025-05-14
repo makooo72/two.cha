@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}TWO.CHA: Профиль{% endblock %}
+
+{% block content %}
+<div class="content-profile">
+    <div class="bg-theme-dark shadow-md rounded-lg p-4 profile">
+            <img src="{{user.photo_path.url}}">
+            <h2 class="text-xl font-bold mb-2 text-white">{{user.username}}</h2>
+            <a href="{% url 'post_create' %}" style="color: white;">Новый пост</a>
+            <p class="text-white">
+                Описание профиля:
+                {{user.forum_user.description}}
+            </p>
+            <div class=" text-white">
+                <span>Подписчики: {{followers}} | Подписки: {{following}}</span><br>
+            </div>
+    </div>
+    <div class="absolute-blogs-profile">
+        {% for post in posts %}
+            <div class="blogs-profile">
+            {% include "post_list.html" with post=post %}
+            </div>
+        {% endfor %}
+        
+    </div>
+</div>
+{% endblock %}

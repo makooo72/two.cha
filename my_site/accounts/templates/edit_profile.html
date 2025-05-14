@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}TWO.CHA: Профиль{% endblock %}
+
+{% block content %}
+<div class="content-profile-edit">
+    <div class="bg-theme-dark shadow-md rounded-lg p-4 profile-edit">
+        <h3>Имя пользователя</h3>
+        <h2>{{ user.username }}</h2><br>
+        <h3>Описание вашего профиля</h3>
+        <input type="text" value="{{user.forum_user.description}}" title="Описание вашего профиля" class="edit-description">
+        <button class="save-button" id="save">Сохранить</button>
+    </div>
+    <script>
+        var csrftoken = "{{ csrf_token }}"
+
+        document.getElementById("save").onclick = () => {
+            const requestObject = new XMLHttpRequest()
+            requestObject.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    window.location.reload()
+                }
+            }
+            if (document.getElementsByClassName("edit-description").value != "{{user.forum_user.description}}") {
+                requestObject.open("POST", '/accounts/profile/save')
+                requestObject.setRequestHeader("X-CSRFToken", csrftoken)
+                const data = new FormData()
+                data.append("id", "{{ user.id }}")
+                data.append("description", document.getElementsByClassName("edit-description").value)
+                requestObject.send(data) 
+            }
+            
+        } 
+    </script>
+</div>
+{% endblock %}

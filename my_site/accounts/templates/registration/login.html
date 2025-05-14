@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link rel="website icon" type="png" href="{% static 'img/logo.png' %}">
+    <title>TWO.CHA: Вход</title>
+</head>
+<body class="body-login">
+    <div class="field">
+        <h1>Вход</h1>
+        <div class="div-login">
+            <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" style="width: 250px;"></a>
+            <div class="form-login">
+                <form method="post" class="login">
+                    {%csrf_token%}
+                    {{form.as_p}}
+                <button class="login-button">Вход</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

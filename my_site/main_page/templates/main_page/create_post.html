@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}TWO.CHA: создание поста{% endblock %}
+
+{% block content %}
+
+<form action="/post/create" method="post" class="create-post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Опубликовать">
+</form>
+
+{% endblock %}

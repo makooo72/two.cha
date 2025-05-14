@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}TWO.CHA: Главная страница{% endblock %}
+
+{% block content %}
+<div class="blogs">
+    {% for post_list in posts_lists %}
+    <div class="roll">
+        {% for post in post_list %}
+            {% include "post_list.html" with post=post %}
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

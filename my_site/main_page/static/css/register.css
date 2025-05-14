@@ -1,0 +1,82 @@
+/* Не смотри на название объектов, я из потом поменяю, просто пишу это в 2 ночи, а мне еще отчет выкладывать*/
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #26282c;
+    font-family: Arial, sans-serif;
+}
+
+.field {
+    position: relative;
+    top: 20vh;
+    box-shadow: 0 4px 6px rgba(207, 207, 207, 0.3);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45vw;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.div-login {
+    position: relative;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    width: 80%;
+}
+
+.form-login {
+    position: relative;
+    left: 2%;
+    width: 98%;
+    height: 65%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    color: white;
+}
+
+input {
+    background-color: #2D3748;
+    font-size: 15px;
+    height: 15px;
+    width: 90%;
+}
+
+.login-button {
+    width: 60px;
+    height: 60px;
+    background-color: #26282c;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-button:hover {
+    background-color: #313338;
+}
+
+.login-button img {
+    width: 40px;
+    height: 40px;
+}
+span {
+    color: white;
+}
+li {
+    color: white;
+}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}TWO.CHA: Чаты{% endblock %}
+
+{% block content %}
+
+<div class="content-chat">
+    <div class="bg-theme-dark shadow-md rounded-lg p-4 chat">
+        <div class="chats">
+            <h2>Чаты</h2>
+            <a onclick=""><div></div></a>
+            <a onclick=""><div></div></a>
+            <a onclick=""><div></div></a>
+        </div>
+        <div class="chatting">
+            <input type="text" class="message-line" placeholder="Сообщение...">
+            <a>
+                <svg class="send-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="Отправить сообщение" role="img">
+                    <path d="M2 21L23 12 2 3 2 10l15 2-15 2z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

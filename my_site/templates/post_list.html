@@ -1,0 +1,11 @@
+<a href="{% url 'post' pk=post.id %}" class="post">
+    <div class="bg-theme-white shadow-md rounded-lg mb-4 text-white blog">
+        <img src="{{post.photo_path.url}}">
+        <p class="text-white description">{{post.title|truncatewords:10|title}}</p>
+        <div class="mt-2 text-white info_blog">
+            <span>Теги: {% for tag in post.tag %}{{tag}}{% endfor %}</span><br>
+            <span>Лайки: {{post.likes}} </span>
+            <span>Комментарии: {{post.posts_count}}</span>
+        </div>
+    </div>
+</a>

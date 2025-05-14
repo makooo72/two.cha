@@ -1,0 +1,57 @@
+services:
+  app:
+    build: 
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./my_site:/core
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_NAME=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS}
+    depends_on:
+      - redis
+      - database
+
+  worker:
+    build: 
+      context: .
+    volumes:
+      - ./my_site:/core
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_NAME=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS}
+
+  redis:
+    image: redis:7.0.5-alpine
+
+  database:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_NAME=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  flower:
+    build:
+      context: .
+    entrypoint: celery
+    command: -A my_site.celery_app flower
+    volumes:
+      - ./my_site:/core
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"
+volumes:
+  db_data:
+

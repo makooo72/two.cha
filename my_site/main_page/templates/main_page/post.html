@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}TWO.CHA: {{post.title}} от {{post.user}}{% endblock %}
+
+{% block content %}
+
+<div class="bg-white shadow-md rounded-lg p-4 mb-4 text-white post">
+    <h1>{{post.title}}</h1>
+    <img src="{{post.photo_path.url}}" style="height: 50%; width: 50%;">
+    <p class="text-white">{{post.description}}</p>
+    <div class="mt-2 text-white">
+        <span>Теги: {% for tag in tags %}{{tag}}{% endfor %}</span><br>
+        <p>{{post.likes}}</p>
+        <button id="post-like" class="like-button">👍</button>
+        
+        <script>
+            var csrftoken = "{{ csrf_token }}"
+
+            document.getElementById("post-like").onclick = () => {
+                const requestObject = new XMLHttpRequest()
+                requestObject.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.reload()
+                    }
+                }
+                requestObject.open("POST", '/like/')
+                requestObject.setRequestHeader("X-CSRFToken", csrftoken)
+
+                const data = new FormData()
+                data.append("id", "{{ post.id }}")
+                data.append("is_comment", "0")
+
+                requestObject.send(data)
+            } 
+        </script>
+
+    </div>
+</div>
+
+<form method="post" class="bg-white rounded-lg p-4 mb-4 text-white comment">
+    <div class="bg-white shadow-md rounded-lg p-4 mb-4 text-white commenting">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Отправить</button>
+    </div><br>
+    {% for message in comments %}
+    <div class="bg-whiterounded-lg p-4 mb-4 text-white comment-user">
+        <h2>{{message.user}}</h2>
+        <p>{{message.description}}</p>
+        <button id="comment-like">👍 {{message.likes}}</button>
+
+        <script>
+            var csrftoken = "{{ csrf_token }}"
+            document.getElementById("comment-like").onclick = () => {
+            const requestObject = new XMLHttpRequest()
+            requestObject.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    window.location.reload()
+                }
+            }
+            requestObject.open("POST", '/like/')
+            requestObject.setRequestHeader("X-CSRFToken", csrftoken)
+
+            const data = new FormData()
+            data.append("id", "{{ message.id }}")
+            data.append("is_comment", "1")
+
+            requestObject.send(data)
+        } 
+        </script>
+
+    </div>
+    {% endfor %}
+</form>
+
+{% endblock %}

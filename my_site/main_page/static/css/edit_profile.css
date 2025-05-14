@@ -1,0 +1,37 @@
+.content-profile-edit {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-edit {
+    position: relative;
+    width: 75vw;
+    height: 80vh;
+}
+
+h2 {
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+input {
+    height: 50px;
+    width: 75vw;
+    font-size: 20px;
+    background-color: #26282c;
+    color: #ffffff;
+    border-width: 0.1px;
+    border-radius: 3px;
+    border-color: #303030;
+    resize: none;
+}
+
+.save-button {
+    position: absolute;
+    bottom: 20px;
+    right: 3vw;
+    scale: 1.5;
+}
